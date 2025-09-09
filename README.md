@@ -1,6 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h3>Name: Dhashvanth B</h3>
+<h3>Register Number: 212224230064</h3>
 
 
 <h3>AIM:</h3>
@@ -40,3 +40,61 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+<H3>PROGRAM</H3>
+
+```
+import random
+
+class MedicinePrescribingAgent:
+    def __init__(self):
+        self.rooms = {"Room 1": None, "Room 2": None}
+        self.performance = 0
+        self.current_room = "Room 1"
+
+    def sense_patient(self, room):
+        self.rooms[room] = round(random.uniform(97.0, 101.0), 1)
+        return self.rooms[room]
+
+    def treat_patient(self, room):
+        temp = self.sense_patient(room)
+        print(f"Checking {room}... Patient temperature: {temp}°F")
+        if temp > 98.5:
+            print(f"Treatment given in {room}.")
+            self.performance += 1
+            self.rooms[room] = 98.4
+        else:
+            print(f"No treatment needed in {room}.")
+
+    def move_to_other_room(self):
+        if self.current_room == "Room 1":
+            print("\nMoving from Room 1 to Room 2...")
+            self.current_room = "Room 2"
+        else:
+            print("\nMoving from Room 2 to Room 1...")
+            self.current_room = "Room 1"
+        self.performance -= 1
+
+    def run(self, steps=2):
+        print("Medicine Prescribing Agent Simulation Started\n")
+        for step in range(steps):
+            self.treat_patient(self.current_room)
+            if step < steps - 1:
+                self.move_to_other_room()
+        print("\nSimulation Complete!")
+        print("Final Performance Score:", self.performance)
+        print("Environment State:", self.rooms)
+
+
+agent = MedicinePrescribingAgent()
+agent.run(steps=2)
+
+
+```
+<H3>OUTPUT</H3>
+
+<img width="575" height="241" alt="Screenshot 2025-09-09 133407" src="https://github.com/user-attachments/assets/d562b73a-54a1-49ef-bafd-300d2ea040c0" />
+
+
+<H3>RESULT</H3>
+
+<p>Thus the AI agent is developed successfully.</p>
